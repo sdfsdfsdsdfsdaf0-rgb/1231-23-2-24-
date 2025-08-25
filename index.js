@@ -117,7 +117,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const userInSupport = new Set();
 const userSupportMessages = new Map(); // userId → messageId
 
-const SUPPORT_GROUP_ID = -4957219998;
+const SUPPORT_GROUP_ID = -1003082469468;
 
 
 
