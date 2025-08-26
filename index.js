@@ -231,10 +231,18 @@ bot.action('back_to_products', async (ctx) => {
 
 
 
-// Остальные кнопки
-bot.hears('📦 Скачать лаунчер', (ctx) => {
-  ctx.reply('Лаунчер на стадии разработки.');
+bot.hears('📦 Скачать лаунер', async (ctx) => {
+  const userId = ctx.from.id;
+
+  // Проверка на уровень
+  if (!(await hasLevel(userId, 1))) {
+    return ctx.reply('🚫 У вас нет покупок.');
+  }
+
+  // Если уровень >= 1
+  await ctx.replyWithDocument({ source: './SR Launcher_setup.exe' });
 });
+
 
 // Поддержка
 bot.hears('💬 Поддержка', (ctx) => {
