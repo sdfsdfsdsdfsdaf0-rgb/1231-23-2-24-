@@ -211,7 +211,7 @@ bot.action('select_srm', async (ctx) => {
   ctx.editMessageText(
     'Вы выбрали SR Helper.\n\n- 99 дней:  800 руб /  410 грн /  $10\n- 30 дней:  400 руб /  200 грн /  $5\n- 14 дней:  240 руб /  120 грн /  $3.',
     Markup.inlineKeyboard([
-    [Markup.button.url('Написать в поддержку', 'https://t.me/TstststysusBot?start=💬%20Поддержка')],
+    [Markup.button.url('Написать в поддержку', 'https://t.me/SR_Helper_RadmirRP_Bot?start=💬%20Поддержка')],
       [Markup.button.callback('Назад', 'back_to_products')]
     ])
   );
