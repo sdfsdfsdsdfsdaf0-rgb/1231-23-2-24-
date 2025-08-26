@@ -250,22 +250,14 @@ bot.hears('❌ Отменить вызов поддержки', async (ctx) => {
   const userId = ctx.from.id;
   userInSupport.delete(userId);
 
-  const msgId = userSupportMessages.get(userId);
+  // Вместо редактирования отправляем новое сообщение
+  await bot.telegram.sendMessage(
+    SUPPORT_GROUP_ID,
+    `📩 Вопрос от @${ctx.from.username || 'БезUsername'} (ID: ${userId}) был закрыт.`
+  );
 
-  if (msgId) {
-    try {
-      await bot.telegram.editMessageText(
-        SUPPORT_GROUP_ID,
-        msgId,
-        undefined,
-        `📩 Вопрос от @${ctx.from.username || 'БезUsername'} (ID: ${userId}):\n${ctx.message.text}\n\n🔒 Вопрос был закрыт`
-      );
-    } catch (e) {
-      console.log('Не удалось отредактировать сообщение:', e.message);
-    }
-
-    userSupportMessages.delete(userId);
-  }
+  // Чистим данные о сообщении (если хранили)
+  userSupportMessages.delete(userId);
 
   ctx.reply('🛑 Вызов поддержки отменён.', {
     reply_markup: mainKeyboard.reply_markup,
