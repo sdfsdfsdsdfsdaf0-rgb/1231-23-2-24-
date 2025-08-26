@@ -231,16 +231,19 @@ bot.action('back_to_products', async (ctx) => {
 
 
 
-bot.hears('📦 Скачать лаунер', async (ctx) => {
+bot.hears('📦 Скачать лаунчер', async (ctx) => {
   const userId = ctx.from.id;
 
-  // Проверка на уровень
   if (!(await hasLevel(userId, 1))) {
     return ctx.reply('🚫 У вас нет покупок.');
   }
 
-  // Если уровень >= 1
-  await ctx.replyWithDocument({ source: './SR Launcher_setup.exe' });
+  try {
+    await ctx.replyWithDocument({ source: './SR Launcher_setup.exe' });
+  } catch (error) {
+    console.error('Ошибка отправки файла:', error);
+    ctx.reply('Произошла ошибка при отправке файла.');
+  }
 });
 
 
